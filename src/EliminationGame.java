@@ -26,8 +26,23 @@ public class EliminationGame {
           }
           return list.get(0);
   }
-  
-  public int lastRemaininglogN(int n) {
 
+  public int lastRemaininglogN(int n) {
+    boolean left = true;
+    int remaining = n;
+    int step = 1;
+    int head = 1;
+    // head is the first number in the lists of number and this gets updated as each lists gets reduced
+    // step is the spacing between each number in the lists
+    // keep reducing remaining and keep track of the first number
+    while (remaining > 1) {
+      if (left || remaining % 2 == 1) {
+        head = step+head;
+      }
+      step = step*2;
+      remaining = remaining/2;
+      left = left!;
+    }
+    return head;
   }
 }
