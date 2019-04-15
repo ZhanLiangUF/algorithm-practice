@@ -30,12 +30,12 @@ public class CourseSchedule {
         }
       }
     }
-    if(count == numCourses) return true;    
+    if(count == numCourses) return true;
     return false;
 
   }
 }
-
+/*
 2, [[1,0],[0,1]]
 
 Graph => 0:[1],1:[0] // 2 Course
@@ -48,3 +48,5 @@ count => 0 // basically any course that isnt a prerequisite for another course
 Graph => 1:[0], 0:[]
 degree => [1,0]
 queue => 1 (course that is not a prerequisite for anything)
+
+*
