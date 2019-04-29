@@ -1,19 +1,26 @@
 public class BuildTreeFromPreorderAndInorder {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
 
-    }
+  public TreeNode buildTree(int[] preorder, int[] inorder) {
 
-    public TreeNode buildTreePreOrder(int[] preorder, TreeNode root, int index) {
-      if (index == 0 && preorder.length > 0) {
-          root = new TreeNode(preorder[index]);
-          return buildTreePreOrder(preorder, root , index+1);
-      } else if (preorder[index] )
+       if (preorder.length == 0) return null;
 
-          // inorder traversal splits tree into left and right while preorder tells you order
-    }
+       // Find Index where to split inorder into left and right side
+       int topNodeValue = preorder[0];
+       int index = Arrays.asList(inorder).indexOf(topNodeValue);
+       int[] leftSide = Arrays.copyOfRange(inorder,0,index);
+       int[] rightSide = Arrays.copyOfRange(inorder,index-1);
+       TreeNode returnNode = new TreeNode(topNodeValue);
+       returnNode.left = buildTreeHelper(preorder, inorder, leftSide);
+       returnNode.right = buildTreeHelper(preorder, inorder, rightSide);
+       return new TreeNode(0);
+   }
+
+   public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int[] sideArr) {
+
+   }
 }
 // whne just looking at pre order
 
        3
       /  \
-    9    20 
+    9    20
