@@ -1,26 +1,57 @@
 public class BuildTreeFromPreorderAndInorder {
 
+  private int p;
   public TreeNode buildTree(int[] preorder, int[] inorder) {
+      if (preorder.length == 0) return null;
 
-       if (preorder.length == 0) return null;
+  // Find Index
+      p = 0; int i = 0;
+      while (preorder[p] != inorder[i]) i++;
 
-       // Find Index where to split inorder into left and right side
-       int topNodeValue = preorder[0];
-       int index = Arrays.asList(inorder).indexOf(topNodeValue);
-       int[] leftSide = Arrays.copyOfRange(inorder,0,index);
-       int[] rightSide = Arrays.copyOfRange(inorder,index-1);
-       TreeNode returnNode = new TreeNode(topNodeValue);
-       returnNode.left = buildTreeHelper(preorder, inorder, leftSide);
-       returnNode.right = buildTreeHelper(preorder, inorder, rightSide);
-       return new TreeNode(0);
-   }
+      // Create Root & Children
+      TreeNode root = new TreeNode(preorder[p++]);
+      if (i > 0)
+          root.left = leftChild(preorder, inorder, 0, i-1);
+      if (i < preorder.length-1)
+          root.right = rightChild(preorder, inorder, i+1, inorder.length-1);
 
-   public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int[] sideArr,int index) {
-      // the algorithm find index of top node, then find what is left or right
-      1. find 3, figure out {9} is on left side and {15,20,7} is on right side
-         a. find 9, figure out {} is on left side and {} is on right side
-         b. find 20, figure out {15} is on left side and {} is on right side
-          // the question is we need a reliable way to find top node
+      // Return Root
+      return root;
+  }
+
+  private TreeNode leftChild(int[] preorder, int[] inorder, int l, int r){
+
+      // Find Index
+      int i = r;
+      while (i >= l && preorder[p] != inorder[i]) i--;
+      if (i < l) return null;
+
+      TreeNode root = new TreeNode(preorder[p++]);
+      if (i > l) {
+          root.left = leftChild(preorder, inorder,l, i-1);
+      }
+      if (i < r) {
+          root.right = rightChild(preorder, inorder,i+1,r);
+      }
+
+      return root;
+
+  }
+
+  private TreeNode rightChild(int[] preorder, int[] inorder, int l, int r) {
+      int i = l;
+      while (i <= r && preorder[p] != inorder[i]) i++;
+      if (i > r) return null;
+
+      TreeNode root = new TreeNode(preorder[p++]);
+        if (i > l) {
+          root.left = leftChild(preorder, inorder,l, i-1);
+      }
+      if (i < r) {
+          root.right = rightChild(preorder, inorder,i+1,r);
+      }
+
+      return root;
   }
 }
 // whne just looking at pre order
