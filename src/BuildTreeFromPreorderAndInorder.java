@@ -15,9 +15,13 @@ public class BuildTreeFromPreorderAndInorder {
        return new TreeNode(0);
    }
 
-   public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int[] sideArr) {
-
-   }
+   public TreeNode buildTreeHelper(int[] preorder, int[] inorder, int[] sideArr,int index) {
+      // the algorithm find index of top node, then find what is left or right
+      1. find 3, figure out {9} is on left side and {15,20,7} is on right side
+         a. find 9, figure out {} is on left side and {} is on right side
+         b. find 20, figure out {15} is on left side and {} is on right side
+          // the question is we need a reliable way to find top node
+  }
 }
 // whne just looking at pre order
 
