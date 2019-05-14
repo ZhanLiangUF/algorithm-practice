@@ -1,7 +1,7 @@
 public class Lis {
 
   static int max_ref; // stores the LIS
-  
+
   public static int _lis(int arr[], int n) {
       // base case
       if (n == 1)
@@ -39,6 +39,32 @@ public class Lis {
 
       // returns max
       return max_ref;
+  }
+
+
+
+  // store max_ending_here in an array somewhere
+  public static int lis(int arr[], int n) {
+    int[] dic = new int[n];
+    // every number by itself has size one
+    for (int x = 0; x < n; x++) {
+      dic[x] = 1;
+    }
+    for (int i = 1; i < n; i++) {
+      int j = 0;
+      while (j < i) {
+        if (arr[j] < arr[i]) {
+          dic[i] = Math.max(dic[i], dic[j] + 1);
+        }
+        j++;
+      }
+    }
+    // find max in array
+    for ( i = 0; i < n; i++ )
+           if ( max < dic[i] )
+              max = dic[i];
+
+    return max;
   }
 
 }
