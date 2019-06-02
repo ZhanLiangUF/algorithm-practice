@@ -54,7 +54,7 @@ public class DFSMatrix {
       for (int[] dir : dirs) {
         int x = curr[0] + dir[0];
         int y = curr[1] + dir[1];
-        if (x < 0 || x > grid.length || y < 0 || y > grid[0].length || visited[x][y] || grid[x][y] == '0') { continue;}
+        if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || visited[x][y] || grid[x][y] == '0') { continue;}
         visited[x][y] = true;
         queue.offer(new int[] {x,y});
       }
